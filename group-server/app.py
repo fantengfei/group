@@ -15,24 +15,11 @@ sockets = Sockets(app)
 app.register_blueprint(todos_view, url_prefix='/todos')
 
 
+# @app.route('/')
+# def index():
+#     return render_template('index.html')
+
+
 @app.route('/')
 def index():
-    return render_template('index.html')
-
-
-@app.route('/time')
-def time():
-    return str(datetime.now())
-
-
-@app.route('/version')
-def print_version():
-    import sys
-    return sys.version
-
-
-@sockets.route('/echo')
-def echo_socket(ws):
-    while True:
-        message = ws.receive()
-        ws.send(message)
+    return '<center><h1>WECOME！！</h1></center>'
