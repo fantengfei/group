@@ -7,17 +7,26 @@ from flask import render_template
 from flask_sockets import Sockets
 
 from views.todos import todos_view
+from api.mini_group import mini_group
+from api.response import BadRequest
 
 app = Flask(__name__)
 sockets = Sockets(app)
 
 # 动态路由
 app.register_blueprint(todos_view, url_prefix='/todos')
+app.register_blueprint(mini_group, url_prefix='/mini-group')
 
 
 # @app.route('/')
 # def index():
 #     return render_template('index.html')
+
+@app.errorhandler(BadRequest)
+def handle_bad_request(error):
+    response = error.to_json()
+    response.status_code = error.status_code
+    return response
 
 
 @app.route('/')
