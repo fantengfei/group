@@ -11,7 +11,8 @@ from flask import jsonify
 import urllib
 import json
 
-from response import BadRequest
+from common.response import BadRequest
+
 
 mini_group = Blueprint('mini-group', __name__)
 

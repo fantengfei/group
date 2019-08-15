@@ -1,14 +1,11 @@
 # coding: utf-8
 
-from datetime import datetime
-
 from flask import Flask
-from flask import render_template
 from flask_sockets import Sockets
 
 from views.todos import todos_view
 from api.mini_group import mini_group
-from api.response import BadRequest
+from common.response import BadRequest
 
 app = Flask(__name__)
 sockets = Sockets(app)
