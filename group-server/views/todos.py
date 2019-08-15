@@ -13,6 +13,7 @@ from flask import render_template
 class Todo(Object):
     pass
 
+
 todos_view = Blueprint('todos', __name__)
 
 
