@@ -4,7 +4,7 @@ from flask import Flask
 from flask_sockets import Sockets
 
 from views.todos import todos_view
-from api.mini_group import mini_group
+from api.mini import mini
 from common.response import BadRequest
 
 app = Flask(__name__)
@@ -12,12 +12,8 @@ sockets = Sockets(app)
 
 # 动态路由
 app.register_blueprint(todos_view, url_prefix='/todos')
-app.register_blueprint(mini_group, url_prefix='/mini-group')
+app.register_blueprint(mini, url_prefix='/mini')
 
-
-# @app.route('/')
-# def index():
-#     return render_template('index.html')
 
 @app.errorhandler(BadRequest)
 def handle_bad_request(error):

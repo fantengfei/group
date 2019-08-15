@@ -14,10 +14,10 @@ import json
 from common.response import BadRequest
 
 
-mini_group = Blueprint('mini-group', __name__)
+mini = Blueprint('mini', __name__)
 
 
-@mini_group.route('/login', methods=['POST'])
+@mini.route('/mini-login', methods=['POST'])
 def login():
     try:
         code = request.form['code']
