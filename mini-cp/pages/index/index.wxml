@@ -1,0 +1,10 @@
+<!--index.wxml-->
+<view class="container">
+    <view wx:if="{{show}}" class="search-wrapper" bindtap="didTapSearchBar">
+        <view class="{{heartOut1}}"></view>
+        <view class="{{heartOut2}}"></view>
+        <view class="{{heartOut3}}"></view>
+        <image class="search-image" src=""></image>
+        <image class="heart-image {{heart}}" src="../../res/image/heart.png"></image>
+    </view>
+</view>

@@ -1,0 +1,36 @@
+{
+    "pages": [
+        "pages/index/index",
+        "pages/logs/logs",
+        "pages/mine/mine"
+    ],
+    "window": {
+        "backgroundTextStyle": "light",
+        "navigationBarBackgroundColor": "#EDEDED",
+        "navigationBarTitleText": "",
+        "navigationBarTextStyle": "black",
+        "backgroundColor":"#EDEDED"
+    },
+    "sitemapLocation": "sitemap.json",
+    "tabBar": {
+        "custom": false,
+        "color": "#7A7E83",
+        "selectedColor": "#3cc51f",
+        "borderStyle": "white",
+        "backgroundColor": "#EDEDED",
+        "list": [
+            {
+                "pagePath": "pages/index/index",
+                "iconPath": "./res/image/match.png",
+                "selectedIconPath": "./res/image/selected-match.png",
+                "text": ""
+            },
+            {
+                "pagePath": "pages/mine/mine",
+                "iconPath": "./res/image/mine.png",
+                "selectedIconPath": "./res/image/selected-mine.png",
+                "text": ""
+            }
+        ]
+    }
+}

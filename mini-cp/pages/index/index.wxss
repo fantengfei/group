@@ -1,0 +1,117 @@
+/**index.wxss**/
+.search-wrapper {
+    width: 170px;
+    height: 170px;
+    border-radius: 50%;
+}
+.search-image {
+    width: 170px;
+    height: 170px;
+    border-radius: 50%;
+    position: absolute;
+    background-color: #681f85;
+    border: 1px solid #681f85;
+}
+.heart-image {
+    width: 85px;
+    height: 75px;
+    position: relative;
+    left: 42.5px;
+    top: 47.5px;
+}
+
+.heart {
+    animation:heart 1s infinite;
+	-webkit-animation:heart 1s infinite;
+}
+@keyframes heart {
+	0% {
+	    transform:scale(1);
+    }   
+    20% {
+	    transform:scale(1.5);
+    }
+    100% {
+	    transform:scale(1);
+    }
+}
+
+.out1, .out2, .out3 {
+    width: 170px;
+    height: 170px;
+    border-radius: 50%;
+    position: absolute;
+    border: 0.5px solid rgb(182, 180, 180);
+}
+
+.out1 {
+    animation:heartout1 1s infinite;
+	-webkit-animation:heartout1 1s infinite;
+	transform:rotate(45deg);
+}
+.out2 {
+    animation:heartout2 1s infinite;
+	-webkit-animation:heartout2 1s infinite;
+	transform:rotate(45deg);
+}
+.out3 {
+    animation:heartout3 1s infinite;
+	-webkit-animation:heartout3 1s infinite;
+	transform:rotate(45deg);
+}
+@keyframes heartout1 {
+	0% {
+	    transform:rotate(45deg) scale(1);
+        opacity: 0;
+    }   
+    30% {
+	    transform:rotate(45deg) scale(1.4);
+        opacity: 1;
+    }
+    70% {
+        transform:rotate(45deg) scale(1.3);
+        opacity: 0;
+    }
+    100% {
+	    transform:rotate(45deg) scale(1);
+        opacity: 0;
+    }
+}
+
+@keyframes heartout2 {
+	0% {
+	    transform:rotate(45deg) scale(1);
+        opacity: 0;
+    }   
+    40% {
+	    transform:rotate(45deg) scale(1.6);
+        opacity: 1;
+    }
+    70% {
+        transform:rotate(45deg) scale(1.5);
+        opacity: 0;
+    }
+    100% {
+	    transform:rotate(45deg) scale(1);
+        opacity: 0;
+    }
+}
+
+@keyframes heartout3 {
+	0% {
+	    transform:rotate(45deg) scale(1);
+        opacity: 0;
+    }   
+    50% {
+	    transform:rotate(45deg) scale(1.8);
+        opacity: 1;
+    }
+    70% {
+	    transform:rotate(45deg) scale(1.7);
+        opacity: 0;
+    }
+    100% {
+	    transform:rotate(45deg) scale(1);
+        opacity: 0;
+    }
+}
