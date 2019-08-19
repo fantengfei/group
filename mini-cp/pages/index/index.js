@@ -8,49 +8,80 @@ Page({
         heartOut1: '',
         heartOut2: '',
         heartOut3: '',
-        heart: ''
+        heart: '',
+        menusAnimationData: {},
+        searchAnimationData: {}
     },
     onLoad: function() {
-        this.isPlay = true
+        this.isPlay = false
     },
-    onReady: function() {  
-        const self = this
-        const render = () => {
-            self.playEffect(true)
+    onReady: function() {
+        const self = this 
+        audio.initAudio((ctx) => {
+            if (ctx == null) { return /* 初始化失败 */}
+            self.audioCtx = ctx
+            self.playEffect()
             self.setData({
                 show: true
             })
-        }
-        audio.initAudio((ctx) => {
-            if (ctx == null) { return /* 初始化错误 */}
-            this.audioCtx = ctx
-            if (!app.logining) {
-                render()
-                return
-            }
-            app.callbackIfNeed = isLoading => {
-                if (isLoading) { return }
-                render()
-            }
         })
     },
 
-    playEffect(play=false) {
-        this.setData({
-            heartOut1: play ? 'out1': '',
-            heartOut2: play ? 'out2': '',
-            heartOut3: play ? '0ut3': '',
-            heart: play ? 'heart': ''
-        })
-        play ? this.audioCtx.play() : this.audioCtx.stop()
+    playEffect() {
+        const play = (isPlay) => {
+            isPlay ? this.audioCtx.play() : this.audioCtx.stop()
+            this.setData({
+                heartOut1: isPlay? 'out1': '',
+                heartOut2: isPlay? 'out2': '',
+                heartOut3: isPlay? 'out3': '',
+                heart: isPlay? 'heart': ''
+            })
+        }
 
-        setTimeout(()=>{
-            this.playEffect(this.isPlay)
-        }, 1000)
+        play(this.isPlay)
+        setTimeout(() => {
+            play(false)
+            this.playEffect()
+        }, 950)
     },
 
     didTapSearchBar() {
-        this.isPlay = !this.isPlay
+        
+    },
+
+    tapMatching() {
+        this.isPlay = true
+        this.handleAnimation(false)
+
+        setTimeout(function() {
+            this.isPlay = false
+            this.handleAnimation(true)
+        }.bind(this), 5000)
+    },
+
+    
+    handleAnimation(show) {
+        const create = () => {
+            return wx.createAnimation({
+                duration: 500,
+                timingFunction: 'ease',
+            })
+        }
+        if (!this.menusAnimation) {
+            this.menusAnimation = create()
+        }
+        if (!this.searchAnimation) {
+            this.searchAnimation = create()
+        }
+        
+        this.menusAnimation.translateY(show ? 0 : 50).opacity(show ? 1 : 0).step()
+        this.searchAnimation.translateY(show?0:50).step()
+        this.setData({
+            menusAnimationData: this.menusAnimation.export(),
+            searchAnimationData: this.searchAnimation.export()
+        })
+
     }
+
 
 })

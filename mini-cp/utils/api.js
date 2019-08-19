@@ -1,6 +1,6 @@
 
-const host = 'http://localhost:3000'
-// const host = 'https://lcen5rxbnywz.leanapp.cn'
+// const host = 'http://localhost:3000'
+const host = 'https://group.somenews.cn'
 
 module.exports = {
     host: host

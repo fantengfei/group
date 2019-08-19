@@ -1,10 +1,26 @@
 <!--index.wxml-->
-<view class="container">
-    <view wx:if="{{show}}" class="search-wrapper" bindtap="didTapSearchBar">
+<view class="container" wx:if="{{show}}">
+    <view class="search-wrapper" bindtap="didTapSearchBar" animation="{{searchAnimationData}}">
         <view class="{{heartOut1}}"></view>
         <view class="{{heartOut2}}"></view>
         <view class="{{heartOut3}}"></view>
         <image class="search-image" src=""></image>
         <image class="heart-image {{heart}}" src="../../res/image/heart.png"></image>
     </view>
+
+    <view class="search-menu" animation="{{menusAnimationData}}">
+        <view class="menu">
+            <button hover-class="btn-hover"><image class="btn" src="../../res/image/filter.png"></image></button>
+            <label>精准筛选</label>
+        </view>
+        <view class="menu">
+            <button hover-class="btn-hover" bindtap="tapMatching"><image class="btn" src="../../res/image/continue.png"></image></button>
+            <label>匹配</label>
+        </view>
+        <view class="menu">
+            <button hover-class="btn-hover"><image class="btn" src="../../res/image/love.png"></image></button>
+            <label>心动</label>
+        </view>
+    </view>
+
 </view>

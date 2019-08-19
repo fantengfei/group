@@ -8,7 +8,7 @@ from flask import Blueprint
 from flask import request
 from flask import jsonify
 
-import urllib
+import requests
 import json
 
 from common.response import BadRequest
@@ -20,23 +20,21 @@ class UserSession(Object):
     pass
 
 
-@mini.route('/login', methods=['POST'])
+@mini.route('/login', methods=['GET'])
 def login():
     try:
-        code = json.loads(request.get_data())['code']
+        code = request.headers['code']
         _url = 'https://api.weixin.qq.com/sns/jscode2session?appid=wx4ce6fa524f8594c3&' \
                'secret=a12ea3c16ce994903920c36ddfab646d&js_code=%s&grant_type=authorization_code' % code
-        result = urllib.urlopen(_url)
-        data = json.load(result)
-    except Exception:
-        raise BadRequest('get openid failure')
+        rep = requests.get(_url)
+        data = rep.json()
+    except Exception as e:
+        raise e
 
     try:
         sessions = Query(UserSession).equal_to('openID', data['openid']).find()
     except LeanCloudError as e:
         raise e
-
-    # print data
 
     if len(sessions) == 0:
         session = UserSession()

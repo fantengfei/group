@@ -45,7 +45,7 @@ const initAudio = (then) => {
         if (callback) {
             const audio = wx.createInnerAudioContext()
             audio.src = wx.getStorageSync('heart_audio')
-            audio.loop = false
+            // audio.loop = true
             then(audio)
             return
         }
