@@ -1,10 +1,10 @@
 const initAudio = (then) => {
-    const getAudioData = (success) => {
+    const getAudioData = (src) => {
         wx.downloadFile({
             url: "http://lc-lcen5rxb.cn-n1.lcfile.com/a0f495c2ae45059539fa/heart.mp3",
             success(res) {
                 if (res.statusCode != 200) {
-                    success(false)
+                    src(null)
                     return
                 }
                 wx.saveFile({
@@ -14,14 +14,17 @@ const initAudio = (then) => {
                             key: 'heart_audio',
                             data: res.savedFilePath,
                             success: () => {
-                                success(true)
+                                src(res.savedFilePath)
                             }
                         })
                     },
                     fail: () => {
-                        success(false)
+                        src(null)
                     }
                 })
+            },
+            fail() {
+                src(null)
             }
         })
     }
@@ -30,26 +33,20 @@ const initAudio = (then) => {
         wx.getStorage({
             key: 'heart_audio',
             success: res => {
-                // console.log(res)
-                callback(true)
+                callback(res.data)
             },
             fail: () => {
-                getAudioData((success) => {
-                    callback(success)
+                getAudioData((src) => {
+                    callback(src)
                 })
             }
         })
     }
 
-    init((callback) => {
-        if (callback) {
-            const audio = wx.createInnerAudioContext()
-            audio.src = wx.getStorageSync('heart_audio')
-            // audio.loop = true
-            then(audio)
-            return
-        }
-        then(null)
+    init((src) => {
+        const audio = wx.createInnerAudioContext()
+        audio.src = src
+        then(audio)
     })
 }
 

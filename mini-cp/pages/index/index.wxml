@@ -1,5 +1,5 @@
 <!--index.wxml-->
-<view class="container" wx:if="{{show}}">
+<view class="container">
     <view class="search-wrapper" bindtap="didTapSearchBar" animation="{{searchAnimationData}}">
         <view class="{{heartOut1}}"></view>
         <view class="{{heartOut2}}"></view>
@@ -10,15 +10,20 @@
 
     <view class="search-menu" animation="{{menusAnimationData}}">
         <view class="menu">
-            <button hover-class="btn-hover"><image class="btn" src="../../res/image/filter.png"></image></button>
+            <button hover-class="btn-hover">
+                <image class="btn" src="../../res/image/filter.png"></image>
+            </button>
             <label>精准筛选</label>
         </view>
         <view class="menu">
-            <button hover-class="btn-hover" bindtap="tapMatching"><image class="btn" src="../../res/image/continue.png"></image></button>
+            <button open-type="{{userInfoOpenType}}" bindgetuserinfo="getUserInfo" hover-class="btn-hover" bindtap="didTapMatching">
+                <image class="btn" src="../../res/image/continue.png"></image>    
+            </button>
             <label>匹配</label>
         </view>
         <view class="menu">
-            <button hover-class="btn-hover"><image class="btn" src="../../res/image/love.png"></image></button>
+            <button open-type="{{phoneOpenType}}" bindgetphonenumber="getPhoneNumber" hover-class="btn-hover" bindtap="didTapLove">
+                <image class="btn" src="../../res/image/love.png"></image></button>
             <label>心动</label>
         </view>
     </view>

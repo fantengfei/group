@@ -5,14 +5,15 @@ const session = require('./utils/session.js')
 App({
     onLaunch: function() {
         const self = this
-        session.getOpenID((openID) => {
-            console.log('openID: ' + openID)
-            self.globalData.openID = openID
-        })
+        // session.getOpenID((openID) => {
+        //     console.log('openID: ' + openID)
+        //     self.data.openID = openID
+        // })
     },
 
-    globalData: {
+    data: {
         userInfo: null,
-        openID: null
+        openID: null,
+        phone: null
     }
 })

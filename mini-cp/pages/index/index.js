@@ -4,11 +4,12 @@ const audio = require('../../utils/audio.js')
 
 Page({
     data: {
-        show: false,
         heartOut1: '',
         heartOut2: '',
         heartOut3: '',
         heart: '',
+        phoneOpenType: app.data.phone == null ? 'getPhoneNumber' : '',
+        userInfoOpenType: app.data.userInfo == null ? 'getUserInfo' : '',
         menusAnimationData: {},
         searchAnimationData: {}
     },
@@ -18,12 +19,8 @@ Page({
     onReady: function() {
         const self = this 
         audio.initAudio((ctx) => {
-            if (ctx == null) { return /* 初始化失败 */}
             self.audioCtx = ctx
             self.playEffect()
-            self.setData({
-                show: true
-            })
         })
     },
 
@@ -45,21 +42,6 @@ Page({
         }, 950)
     },
 
-    didTapSearchBar() {
-        
-    },
-
-    tapMatching() {
-        this.isPlay = true
-        this.handleAnimation(false)
-
-        setTimeout(function() {
-            this.isPlay = false
-            this.handleAnimation(true)
-        }.bind(this), 5000)
-    },
-
-    
     handleAnimation(show) {
         const create = () => {
             return wx.createAnimation({
@@ -80,8 +62,45 @@ Page({
             menusAnimationData: this.menusAnimation.export(),
             searchAnimationData: this.searchAnimation.export()
         })
+    },
 
+    getUserInfo(res) {
+        console.log(res.detail.userInfo)
+        app.data.userInfo = res.detail.userInfo
+        this.setData({
+            userInfoOpenType: ''
+        })
+        this.didTapMatching()
+    },
+
+    getPhoneNumber(res) {
+        console.log(res)
+    },
+
+// ======================================== wxml method ==================================
+    
+    didTapSearchBar() {
+
+    },
+
+    didTapMatching() {
+        if (app.data.userInfo == null) { return }
+        wx.vibrateShort()
+        this.isPlay = true
+        this.handleAnimation(false)
+
+        // stop animation
+        setTimeout(function () {
+            this.isPlay = false
+            this.handleAnimation(true)
+            wx.vibrateLong({})
+        }.bind(this), 5000)
+    },
+
+    didTapLove() {
+        if (app.data.phone == null) { return }
+        wx.vibrateShort()
     }
 
-
+    
 })
