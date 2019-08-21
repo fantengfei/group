@@ -1,5 +1,6 @@
 //index.js
 const app = getApp()
+const cst = require('../../utils/constants.js')
 const audio = require('../../utils/audio.js')
 
 Page({
@@ -8,17 +9,39 @@ Page({
         heartOut2: '',
         heartOut3: '',
         heart: '',
-        phoneOpenType: app.data.phone == null ? 'getPhoneNumber' : '',
-        userInfoOpenType: app.data.userInfo == null ? 'getUserInfo' : '',
+        phoneOpenType: true,
+        userInfoOpenType: true,
         menusAnimationData: {},
         searchAnimationData: {}
     },
     onLoad: function() {
-        this.isPlay = false
+        const self = this
+        wx.getStorage({
+            key: cst.userInfoKey,
+            success: function(res) {
+                app.data.userInfo = res.data
+                self.setData({
+                    userInfoOpenType: false
+                })
+            }
+        })
+        wx.getStorage({
+            key: cst.userPhoneKey,
+            success: function(res) {
+                app.data.phone = res.data
+                self.setData({
+                    phoneOpenType: false
+                })
+            }
+        })
+    },
+    onShow: function () {
+        this.getTabBar().setData({ selected: 0 })
     },
     onReady: function() {
         const self = this 
         audio.initAudio((ctx) => {
+            self.isPlay = false
             self.audioCtx = ctx
             self.playEffect()
         })
@@ -67,10 +90,14 @@ Page({
     getUserInfo(res) {
         console.log(res.detail.userInfo)
         app.data.userInfo = res.detail.userInfo
-        this.setData({
-            userInfoOpenType: ''
+        wx.setStorage({
+            key: cst.userInfoKey,
+            data: res.detail.userInfo,
         })
         this.didTapMatching()
+        
+        const cloud = require('../../utils/api.js')
+        cloud.syncUserInfo()
     },
 
     getPhoneNumber(res) {

@@ -3,16 +3,17 @@ Component({
         selected: 0,
         color: "#7A7E83",
         selectedColor: "#3cc51f",
+        backgroundColor: "#EDEDED",
         list: [{
             pagePath: "../index/index",
-            iconPath: "",
-            selectedIconPath: "",
-            text: "匹配"
+            iconPath: "../res/image/match.png",
+            selectedIconPath: "../res/image/selected-match.png",
+            text: ""
         }, {
             pagePath: "../mine/mine",
-            iconPath: "",
-            selectedIconPath: "",
-            text: "我的"
+            iconPath: "../res/image/mine.png",
+            selectedIconPath: "../res/image/selected-mine.png",
+            text: ""
         }]
     },
     attached() {
@@ -22,9 +23,7 @@ Component({
             const data = e.currentTarget.dataset
             const url = data.path
             wx.switchTab({ url })
-            this.setData({
-                selected: data.index
-            })
+            wx.vibrateShort()
         }
     }
 })

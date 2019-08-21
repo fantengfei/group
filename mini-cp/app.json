@@ -13,7 +13,7 @@
     },
     "sitemapLocation": "sitemap.json",
     "tabBar": {
-        "custom": false,
+        "custom": true,
         "color": "#7A7E83",
         "selectedColor": "#3cc51f",
         "borderStyle": "white",
@@ -32,5 +32,6 @@
                 "text": ""
             }
         ]
-    }
+    },
+    "usingComponents": {}
 }

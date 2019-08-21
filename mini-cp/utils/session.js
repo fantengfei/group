@@ -4,7 +4,7 @@ const login = callback => {
         success: res => {
             const api = require('./api.js')
             wx.request({
-                url: api.host + '/mini/login',
+                url: api.host + 'login',
                 method: 'GET',
                 header: {
                     code: res.code

@@ -1,0 +1,13 @@
+/** pages/custom-tabbar/index.wxss */
+.tab-bar {
+    display: flex;
+    flex-direction: row;
+    height: 64px;
+    align-items: center;
+    justify-content: space-around;
+    padding-bottom: env(safe-area-inset-bottom);
+}
+.tab-bar-item {
+    width: 30px;
+    height: 30px;
+}

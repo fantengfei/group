@@ -16,13 +16,13 @@
             <label>精准筛选</label>
         </view>
         <view class="menu">
-            <button open-type="{{userInfoOpenType}}" bindgetuserinfo="getUserInfo" hover-class="btn-hover" bindtap="didTapMatching">
+            <button open-type="{{userInfoOpenType?'getUserInfo':''}}" bindgetuserinfo="getUserInfo" hover-class="btn-hover" bindtap="didTapMatching">
                 <image class="btn" src="../../res/image/continue.png"></image>    
             </button>
-            <label>匹配</label>
+            <label>探探</label>
         </view>
         <view class="menu">
-            <button open-type="{{phoneOpenType}}" bindgetphonenumber="getPhoneNumber" hover-class="btn-hover" bindtap="didTapLove">
+            <button open-type="{{phoneOpenType?'getPhoneNumber':''}}" bindgetphonenumber="getPhoneNumber" hover-class="btn-hover" bindtap="didTapLove">
                 <image class="btn" src="../../res/image/love.png"></image></button>
             <label>心动</label>
         </view>

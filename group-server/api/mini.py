@@ -19,6 +19,17 @@ mini = Blueprint('mini', __name__)
 class UserSession(Object):
     pass
 
+class UserInfo(Object):
+    def fill(self, data):
+        self.set('phone', data.get('phone'))
+        self.set('openID', data.get('openID'))
+        self.set('province', data.get('province'))
+        self.set('city', data.get('city'))
+        self.set('avatarUrl', data.get('avatarUrl'))
+        self.set('gender', data.get('gender'))
+        self.set('country', data.get('country'))
+        self.set('nickName', data.get('nickName'))
+
 
 @mini.route('/login', methods=['GET'])
 def login():
@@ -32,23 +43,65 @@ def login():
         raise e
 
     try:
-        sessions = Query(UserSession).equal_to('openID', data['openid']).find()
+        session = Query(UserSession).equal_to('openID', data['openid']).first()
+    except LeanCloudError as e:
+        if e.code == 101:
+            session = UserSession()
+        else:
+            raise e
+
+    session.set('sessionKey', data['session_key'])
+    session.set('openID', data['openid'])
+    try:
+        session.save()
     except LeanCloudError as e:
         raise e
 
-    if len(sessions) == 0:
-        session = UserSession()
-        session.set('sessionKey', data['session_key'])
-        session.set('openID', data['openid'])
-        try:
-            session.save()
-        except LeanCloudError as e:
-            raise e
-    else:
-        session = UserSession().create_without_data(sessions[0].id).set('sessionKey', data['session_key'])
-        try:
-            session.save()
-        except LeanCloudError as e:
+    return jsonify({'openid': data['openid']})
+
+
+@mini.route('/update-user-info', methods=['POST'])
+def update_user_info():
+    try:
+        data = json.loads(request.get_data())
+        content = data['content']
+        # print data
+
+        if data.has_key('openID') is False:
+            raise BadRequest('openID is None')
+
+        content['openID'] = data.get('openID')
+        content['phone'] = data.get('phone')
+    except Exception as e:
+        raise e
+
+    try:
+        info = Query(UserInfo).equal_to('openID', data['openID']).first()
+    except LeanCloudError as e:
+        if e.code == 101:
+            info = UserInfo()
+        else:
             raise e
 
-    return jsonify({'openid': data['openid']})
+    info.fill(content)
+    try:
+        info.save()
+        return jsonify({'success': True})
+    except LeanCloudError as e:
+        raise e
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
