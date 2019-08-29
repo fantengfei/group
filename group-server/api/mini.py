@@ -3,7 +3,7 @@
 from flask import Blueprint
 from flask import request
 
-import miniQuery
+from api.query import miniQuery
 
 mini = Blueprint('mini', __name__)
 
@@ -16,3 +16,7 @@ def login():
 @mini.route('/update-user-info', methods=['POST'])
 def update_user_info():
     return miniQuery.update_user_info(request)
+
+@mini.route('/get-tab-bar', methods=['GET'])
+def get_tab_bar():
+    return miniQuery.get_tab_bar()

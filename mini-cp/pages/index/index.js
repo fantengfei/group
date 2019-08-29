@@ -12,7 +12,8 @@ Page({
         phoneOpenType: true,
         userInfoOpenType: true,
         menusAnimationData: {},
-        searchAnimationData: {}
+        searchAnimationData: {},
+        items: app.data.tabBarItems
     },
     onLoad: function() {
         const self = this
@@ -35,12 +36,14 @@ Page({
             }
         })
     },
+
     onShow: function () {
         this.getTabBar().setData({
           selected: 0,
           isShow: true
         })
     },
+
     onReady: function() {
         const self = this 
         audio.initAudio((ctx) => {

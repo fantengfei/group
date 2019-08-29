@@ -31,7 +31,7 @@ def handle_bad_gateway(error):
 
 @app.route('/')
 def index():
-    return '<center><h1>WECOME！！</h1></center>'
+    return '<center><h1>扒卦</h1></center>'
 
 
 if __name__ == '__main__':

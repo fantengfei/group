@@ -27,5 +27,5 @@
             <label>心动</label>
         </view>
     </view>
-
 </view>
+<Tabbar list="{{items}}" />

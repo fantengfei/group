@@ -1,4 +1,8 @@
 Component({
+    properties: {
+        list:[],
+        selected: 0
+    },
     data: {
         selected: 0,
         isShow: false,
@@ -17,13 +21,12 @@ Component({
             text: ""
         }]
     },
-    attached() {
-    },
+    attached() {},
     methods: {
         switchTab(e) {
             const data = e.currentTarget.dataset
             const url = data.path
-            wx.switchTab({ url })
+            wx.redirectTo({ url })
             wx.vibrateShort()
         }
     }

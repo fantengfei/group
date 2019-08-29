@@ -10,10 +10,15 @@ import requests
 import json
 
 from common.response import BadRequest
-from models import UserInfo, UserSession
+from common.models import UserInfo, UserSession, Tabbar
 
 
 def login(req):
+    """
+
+    :param req:
+    :return:
+    """
     try:
         code = req.headers['code']
         _url = 'https://api.weixin.qq.com/sns/jscode2session?appid=wx4ce6fa524f8594c3&' \
@@ -44,6 +49,11 @@ def login(req):
 
 
 def update_user_info(req):
+    """
+
+    :param req:
+    :return:
+    """
     try:
         data = json.loads(req.get_data())
         content = data['content']
@@ -70,3 +80,10 @@ def update_user_info(req):
         return jsonify({'success': True})
     except LeanCloudError as e:
         raise e
+
+
+def get_tab_bar():
+    """
+    :return:
+    """
+    return jsonify({'type': 1})

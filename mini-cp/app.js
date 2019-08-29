@@ -8,11 +8,19 @@ App({
         session.getOpenID((openID) => {
             console.log('openID: ' + openID)
         })
+
+        session.getTabbar((items) => {
+            self.data.tabBarItems = items
+            const url = items[0].pagePath
+            console.log(url)
+            wx.redirectTo({ url })
+        })
     },
 
     data: {
         userInfo: null,
         openID: null,
-        phone: null
+        phone: null,
+        tabBarItems: []
     }
 })

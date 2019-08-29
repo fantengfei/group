@@ -40,7 +40,21 @@ const syncUserInfo = (success = () => {}, fail = () => {}) => {
     })
 }
 
+const getTabbar = (success = () => { }, fail = () => { }) => {
+    wx.request({
+        url: host + 'get-tab-bar',
+        success: res => {
+            console.log(res)
+            success(res.data)
+        },
+        fail: () => {
+            fail()
+        }
+    })
+}
+
 module.exports = {
     host: host,
-    syncUserInfo: syncUserInfo
+    syncUserInfo: syncUserInfo,
+    getTabbar: getTabbar
 }

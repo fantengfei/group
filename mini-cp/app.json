@@ -1,7 +1,6 @@
 {
     "pages": [
         "pages/index/index",
-        "pages/logs/logs",
         "pages/mine/mine"
     ],
     "window": {
@@ -9,29 +8,10 @@
         "navigationBarBackgroundColor": "#EDEDED",
         "navigationBarTitleText": "",
         "navigationBarTextStyle": "black",
-        "backgroundColor":"#EDEDED"
+        "backgroundColor": "#EDEDED"
     },
     "sitemapLocation": "sitemap.json",
-    "tabBar": {
-        "custom": true,
-        "color": "#7A7E83",
-        "selectedColor": "#3cc51f",
-        "borderStyle": "white",
-        "backgroundColor": "#EDEDED",
-        "list": [
-            {
-                "pagePath": "pages/index/index",
-                "iconPath": "./res/image/match.png",
-                "selectedIconPath": "./res/image/selected-match.png",
-                "text": ""
-            },
-            {
-                "pagePath": "pages/mine/mine",
-                "iconPath": "./res/image/mine.png",
-                "selectedIconPath": "./res/image/selected-mine.png",
-                "text": ""
-            }
-        ]
-    },
-    "usingComponents": {}
+    "usingComponents": {
+        "Tabbar": "./custom-tab-bar/index"
+    }
 }
