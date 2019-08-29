@@ -16,8 +16,8 @@ from models import UserInfo, UserSession
 def login(req):
     try:
         code = req.headers['code']
-        _url = 'https://api.weixin.qq.com/sns/jscode2session?appid=wx22e8aa5cfa7cab7a&' \
-               'secret=645371539ddd5d6105d7ef5a34541c2c&js_code=%s&grant_type=authorization_code' % code
+        _url = 'https://api.weixin.qq.com/sns/jscode2session?appid=wx4ce6fa524f8594c3&' \
+               'secret=2cc442036cef870edf9b2a0546b0c335&js_code=%s&grant_type=authorization_code' % code
         rep = requests.get(_url)
         data = rep.json()
         if 'errmsg' in data:
