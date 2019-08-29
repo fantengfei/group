@@ -1,6 +1,6 @@
 
-const host = 'http://localhost:3000/mini/'
-// const host = 'https://group.somenews.cn/mini/'
+// const host = 'http://localhost:3000/mini/'
+const host = 'https://www.somenews.cn/mini/'
 
 
 const syncUserInfo = (success = () => {}, fail = () => {}) => {

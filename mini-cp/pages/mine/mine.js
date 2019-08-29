@@ -19,14 +19,17 @@ Page({
      * 生命周期函数--监听页面初次渲染完成
      */
     onReady: function () {
-
+        this.getTabBar().setData({
+            selected: 1,
+            isShow: true
+        })
     },
 
     /**
      * 生命周期函数--监听页面显示
      */
     onShow: function () {
-        this.getTabBar().setData({ selected: 1 })
+        
 
 
     },

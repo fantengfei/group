@@ -36,7 +36,10 @@ Page({
         })
     },
     onShow: function () {
-        this.getTabBar().setData({ selected: 0 })
+        this.getTabBar().setData({
+          selected: 0,
+          isShow: true
+        })
     },
     onReady: function() {
         const self = this 
