@@ -14,6 +14,25 @@ const formatNumber = n => {
   return n[1] ? n : '0' + n
 }
 
+const statusBarHeight = () => {
+    return wx.getSystemInfoSync().statusBarHeight
+}
+
+const menuMargin = () => {
+    let rect = wx.getMenuButtonBoundingClientRect ? wx.getMenuButtonBoundingClientRect() : null
+    let gap = rect.top - statusBarHeight()
+    return gap
+}
+
+const menuHeight = () => {
+    let rect = wx.getMenuButtonBoundingClientRect ? wx.getMenuButtonBoundingClientRect() : null
+    return rect.height
+}
+
+
 module.exports = {
-  formatTime: formatTime
+  formatTime: formatTime,
+  statusBarHeight: statusBarHeight(),
+  menuMargin: menuMargin(),
+  menuHeight: menuHeight()
 }

@@ -2,9 +2,11 @@
 const app = getApp()
 const cst = require('../../utils/constants.js')
 const audio = require('../../utils/audio.js')
+const session = require('../../utils/session.js')
 
 Page({
     data: {
+        show: 0,
         heartOut1: '',
         heartOut2: '',
         heartOut3: '',
@@ -12,14 +14,34 @@ Page({
         phoneOpenType: true,
         userInfoOpenType: true,
         menusAnimationData: {},
-        searchAnimationData: {},
-        items: app.data.tabBarItems
+        searchAnimationData: {}
     },
     onLoad: function() {
         const self = this
+        session.getPageType((type) => {
+            app.data.pageType = type
+            self.setData({ show: type })
+            if (type == 1) {
+                self.configLocalData()
+                audio.initAudio((ctx) => {
+                    self.isPlay = false
+                    self.audioCtx = ctx
+                    self.playEffect()
+                })
+                this.getTabBar().setData({
+                    selected: 0,
+                    isShow: true
+                })
+                return
+            }
+        })
+    },
+
+    configLocalData() {
+        const self = this
         wx.getStorage({
             key: cst.userInfoKey,
-            success: function(res) {
+            success: function (res) {
                 app.data.userInfo = res.data
                 self.setData({
                     userInfoOpenType: false
@@ -28,28 +50,12 @@ Page({
         })
         wx.getStorage({
             key: cst.userPhoneKey,
-            success: function(res) {
+            success: function (res) {
                 app.data.phone = res.data
                 self.setData({
                     phoneOpenType: false
                 })
             }
-        })
-    },
-
-    onShow: function () {
-        this.getTabBar().setData({
-          selected: 0,
-          isShow: true
-        })
-    },
-
-    onReady: function() {
-        const self = this 
-        audio.initAudio((ctx) => {
-            self.isPlay = false
-            self.audioCtx = ctx
-            self.playEffect()
         })
     },
 

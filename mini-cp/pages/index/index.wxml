@@ -1,5 +1,5 @@
 <!--index.wxml-->
-<view class="container">
+<view class="container" wx:if="{{show == 1}}">
     <view class="search-wrapper" bindtap="didTapSearchBar" animation="{{searchAnimationData}}">
         <view class="{{heartOut1}}"></view>
         <view class="{{heartOut2}}"></view>
@@ -28,4 +28,4 @@
         </view>
     </view>
 </view>
-<Tabbar list="{{items}}" />
+<cp-news wx:if="{{show == 2}}" />

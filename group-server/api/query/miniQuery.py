@@ -86,4 +86,4 @@ def get_tab_bar():
     """
     :return:
     """
-    return jsonify({'type': 1})
+    return jsonify({'type': 2})

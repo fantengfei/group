@@ -45,7 +45,11 @@ const getTabbar = (success = () => { }, fail = () => { }) => {
         url: host + 'get-tab-bar',
         success: res => {
             console.log(res)
-            success(res.data)
+            if (res.statusCode == 200) {
+                success(res.data)
+                return
+            }
+            fail()
         },
         fail: () => {
             fail()

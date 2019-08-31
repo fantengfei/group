@@ -53,37 +53,20 @@ const getOpenID = result => {
 
 const configTabbar = (callback) => {
     const self = this
-    const makeItems = (list = []) => {
-        if (list.length == 0) {
-            console.log('show append and items')
-            return
-        }
-        var items = []
-        for (const key in list) {
-            const v = list[key]
-            const item = {
-                pagePath: v.path,
-                iconPath: v.icon,
-                selectedIconPath: v.selected_icon,
-            }
-            items.push(item)
-        }
-        callback(items)
-    }
-
-    wx.showLoading({ title: '数据加载中...' })
+    wx.showLoading({ title: '数据加载中' })
     const api = require('api.js')
     api.getTabbar((data) => {
-        makeItems(data)
+        console.log(data)
+        callback(data.type)
         wx.hideLoading()
     }, (fail) => {
-        makeItems()
+        callback(2)
         wx.hideLoading()
     })
 }
 
 module.exports = {
     getOpenID: getOpenID,
-    getTabbar: configTabbar
+    getPageType: configTabbar
 }
 

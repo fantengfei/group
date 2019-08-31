@@ -1,0 +1,8 @@
+<!--pages/news/news.wxml-->
+<view class="container">
+    <view class="news-nav" style="{{navStyle}}">
+        <!-- <image>投稿</image> -->
+        <text>扒卦</text>
+        
+    </view>
+</view>
